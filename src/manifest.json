@@ -1,0 +1,40 @@
+{
+  "compatibleVersion": 3,
+  "bundleVersion": 1,
+  "commands": [
+    {
+      "script": "action.js",
+      "handler": "selectArtboard",
+      "name": "上传所选 画板",
+      "shortcut": "command l",
+      "identifier": "davinci.select"
+    },
+    {
+      "script": "action.js",
+      "handler": "allArtboard",
+      "name": "上传全部 画板",
+      "shortcut": "ctrl command l",
+      "identifier": "davinci.all"
+    },
+    {
+      "script": "action.js",
+      "handler": "logOut",
+      "name": "取消授权",
+      "shortcut": "ctrl alt o",
+      "identifier": "logout"
+    }
+  ],
+  "menu": {
+    "title": "👩‍🎨达文西",
+    "items": [
+      "davinci.select",
+      "davinci.all",
+      {
+        "title": "更多",
+        "items": [
+          "logout"
+        ]
+      }
+    ]
+  }
+}
