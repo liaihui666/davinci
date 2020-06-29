@@ -16,7 +16,7 @@ let exportType = ''
 
 const browserWindow = new BrowserWindow(options)
 
-browserWindow.loadURL(require('../../resources/export/index.html'))
+browserWindow.loadURL(require('../../resources/export.html'))
 
 
 export function showExportModal(type){
@@ -34,6 +34,7 @@ export function hideExportModal(){
 const webContents = browserWindow.webContents
 
 webContents.on('exportConfirm', name => {
+  console.log('webContents',name)
   let template = convert(name, exportType)
   // createTemplate(template).then(()=>{
     UI.message('导出成功')

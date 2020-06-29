@@ -2,6 +2,7 @@
 import UI from 'sketch/ui'
 import { fetchScope, createTemplate, login, logout } from './utils/request'
 import { showExportModal } from './modal/export'
+import { showLoginModal } from './modal/login'
 
 // 选择
 export function selectArtboard(context){
@@ -10,7 +11,7 @@ export function selectArtboard(context){
 
 // 全部
 export function allArtboard(context){
-  showExportModal('all')
+  showLoginModal()
 }
 
 // 取消授权

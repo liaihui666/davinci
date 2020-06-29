@@ -12,7 +12,7 @@ const options = {
 
 const browserWindow = new BrowserWindow(options)
 
-browserWindow.loadURL(require('../../resources/login/index.html'))
+browserWindow.loadURL(require('../../resources/login.html'))
 
 
 export function showLoginModal(){

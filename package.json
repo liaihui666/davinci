@@ -17,6 +17,7 @@
     "build": "skpm-build",
     "watch": "skpm-build --watch",
     "start": "skpm-build --watch",
+    "publish": "skpm publish patch",
     "postinstall": "npm run build && skpm-link"
   },
   "devDependencies": {
