@@ -28,6 +28,7 @@
     "sketch-polyfill-fetch": "^0.5.2",
     "uuid": "^8.2.0"
   },
+  "repository": "https://git.aipp.io/hangwei/davinci-export",
   "resources": [
     "resources/**/*.js"
   ],

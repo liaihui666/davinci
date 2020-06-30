@@ -30,7 +30,7 @@ export function hideLoginModal(){
 const webContents = browserWindow.webContents
 
 webContents.on('loginSubmit', payload => {
-  login(password).then(()=>{
+  login(payload).then(()=>{
     hideLoginModal()
     UI.message('授权成功')
   })

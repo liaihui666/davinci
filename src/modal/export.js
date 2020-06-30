@@ -34,9 +34,20 @@ export function hideExportModal(){
 const webContents = browserWindow.webContents
 
 webContents.on('exportConfirm', name => {
-  console.log('webContents',name)
   let template = convert(name, exportType)
-  // createTemplate(template).then(()=>{
+  createTemplate(template).then((res)=>{
+    console.log('------success---------')
+    console.log(res)
+    console.log(res.json())
+    console.log('---------------')
+
+
+    
     UI.message('导出成功')
-  // })
+  }).catch(res=>{
+    console.log('------fail---------')
+    console.log(res)
+    console.log(res.json())
+    console.log('---------------')
+  })
 })

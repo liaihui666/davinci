@@ -1,4 +1,3 @@
-
 export const urlPrefix = 'https://alpha-cube.aidigger.com'
 export const owlPrefix = 'https://owl.aidigger.com/api/v1'
 
@@ -7,14 +6,22 @@ const post = function (url, payload) {
   if (url.includes('http') === false) {
     url = urlPrefix + url
   }
-  return fetch(url, {
-    method: "POST",
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    credentials: 'include',
-    body: JSON.stringify(payload)
+  return new Promise((resolve, reject) => {
+    fetch(url, {
+      method: "POST",
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(payload)
+    }).then(res => {
+      if (res.status === 200) {
+        resolve(res)
+      } else {
+        reject(res)
+      }
+    }).catch(reject)
   })
 }
 
@@ -25,7 +32,7 @@ const get = function (url, payload) {
   return fetch(url, payload)
 }
 
-const deleta = function (url){
+const deleta = function (url) {
   if (url.includes('http') === false) url = urlPrefix + url
   return fetch(url, {
     method: 'DELETE',
@@ -43,13 +50,21 @@ export function createTemplate(payload) {
 }
 
 export function login(payload) {
-  // const payload = {
-  //   account: "hangwei@aidigger.com",
-  //   password: "97c63e1a61a803c977d6c6e5e3385036"
-  // }
   return post(`${owlPrefix}/session`, payload)
 }
 
-export function logout(){
-  return deleta(`${owlPrefix}/session`)
-}
+export function logout() {
+  return new Promise((resolve, reject) => {
+    deleta(`${owlPrefix}/session`).then(() => {
+      var storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+      let cookies = storage.cookies()
+      let len = cookies.count()
+      for (let i = 0; i < len; i++) {
+        let currentCookie = cookies[i]
+        if (currentCookie.domain() == '.aidigger.com') {
+          storage.deleteCookie(currentCookie)
+        }
+      })
+      resolve()
+    }).catch(reject)
+  }

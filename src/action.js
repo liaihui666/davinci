@@ -1,25 +1,39 @@
-
 import UI from 'sketch/ui'
-import { fetchScope, createTemplate, login, logout } from './utils/request'
-import { showExportModal } from './modal/export'
-import { showLoginModal } from './modal/login'
+import {
+  fetchScope,
+  createTemplate,
+  login,
+  logout
+} from './utils/request'
+import {
+  showExportModal
+} from './modal/export'
+import {
+  showLoginModal
+} from './modal/login'
 
 // 选择
-export function selectArtboard(context){
+export function selectArtboard(context) {
   showExportModal('select')
 }
 
 // 全部
-export function allArtboard(context){
+export function allArtboard(context) {
   showLoginModal()
 }
 
 // 取消授权
-export function logOut(context){
-  logout().then(()=>{
+export function logOut(context) {
+  logout().then((res) => {
+    for (c in a.cookies()) {
+      a.deleteCookie(c)
+    }
+    console.log(res)
+    console.log(res.json())
     UI.message('取消授权成功')
   })
 }
+
 
 // // 选择
 // export function select(context) {  
@@ -39,6 +53,8 @@ export function logOut(context){
 //   // onShow(context)	
 // }
 
+
+
 // // 全部
 // export function all(context) {  
 //   // onShow(context)	
@@ -57,4 +73,3 @@ export function logOut(context){
 // // export function onShutdown (context) {
 // //   hideLoginModal(context)
 // // }
-
