@@ -1,5 +1,6 @@
 export const urlPrefix = 'https://alpha-cube.aidigger.com'
 export const owlPrefix = 'https://owl.aidigger.com/api/v1'
+let base64 = require('base-64')
 
 
 const post = function (url, payload) {
@@ -11,12 +12,13 @@ const post = function (url, payload) {
       method: "POST",
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + base64.encode("sys-davinci:Eigen2020&6763")
       },
       credentials: 'include',
       body: JSON.stringify(payload)
     }).then(res => {
-      if (res.status === 200) {
+      if (res.status === 200 || res.status === 201) {
         resolve(res)
       } else {
         reject(res)
@@ -55,7 +57,8 @@ export function login(payload) {
 
 export function logout() {
   return new Promise((resolve, reject) => {
-    deleta(`${owlPrefix}/session`).then(() => {
+    deleta(`${owlPrefix}/session`)
+    .then(() => {
       var storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
       let cookies = storage.cookies()
       let len = cookies.count()
@@ -64,7 +67,9 @@ export function logout() {
         if (currentCookie.domain() == '.aidigger.com') {
           storage.deleteCookie(currentCookie)
         }
-      })
+      }
       resolve()
-    }).catch(reject)
-  }
+    })
+    .catch(reject)
+  })
+}
